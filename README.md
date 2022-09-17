@@ -272,3 +272,7 @@ app.get("/deleteuserbackend", (req, res) => {
 app.listen(3000, () => console.log("Listening on port 3000"))
 ```
 Here we just initialize the server and print out when the server is ready.
+
+Here is a visual demonstration of the whole thing.
+
+<img src="https://iili.io/iAKsVI.png" width=100%>
