@@ -1,14 +1,14 @@
 # Pug-and-Mysql
-A short demonstration on how you can interact with an MySql database using Node.js.
+A short demonstration of how you can interact with a MySql database using Node.js.
 
 ## Getting started
-If you want to follow along, youll first of all need a MySql database setup and know its IP and password. Running the code as is will cause an error. The server needs Node.js to be installed in order to work aswell.
+If you want to follow along, you'll first of all need a MySql database setup and know its IP and password. Running the code as is will cause an error. The server needs Node.js to be installed to work as well.
 
 [Download Node.js](https://nodejs.org/en/download/)
 
 [Download MySql](https://dev.mysql.com/downloads/installer/)
 
-**Once both MySql and Nodejs has been installed**, go ahead and setup a database connection in MySql, and create a database with a "users" table with a *name* variable and an *id* Primaty key, as variable shown below. I will not cover how to but there are plenty of tutorials online.
+**Once both MySql and Nodejs have been installed**, go ahead and set up a database connection in MySql, and create a database with a "users" table with a *name* variable and an *id* Primary key, as shown below. I will not cover how to but there are plenty of tutorials online.
 
 (MySql)
 
@@ -19,11 +19,11 @@ CREATE TABLE brukere
     id_ int PRIMARY KEY
 );
 ```
-The underscore after the ID is important to add to that we can check if the last character is an underscore later in the code. This will make us able to only display the name field for the client to fill in and not the id.
+The underscore after the ID is important to add so that we can detect it in the code. This will make us able to differentiate between automatic fields and fields filled out by the user.
 
-In order to make Nodejs able to send and receive requests, you need to install [express](https://www.npmjs.com/package/express) my typing in `npm install express`. The npm package manager is included with the Nodejs installer.
+To make Nodejs able to send and receive requests, you need to install [express](https://www.npmjs.com/package/express) by typing in `npm install express`. The npm package manager is included with the Nodejs installer.
 
-You also want to be able to display context from the server onto the HTML file. For this you need to install [pug](https://www.npmjs.com/package/pug) with `npm install pug`
+You also want to be able to display context from the server onto the HTML file. For this, you need to install [pug](https://www.npmjs.com/package/pug) with `npm install pug`
 
 ## The code
 I will now go into detail as to how the code works.
@@ -102,7 +102,7 @@ body(style="background-color:#232323; color:white;")
          border-radius:5px;
       }
 ```
-Now back to home.pug, we see the all familiar extends tag. Followed by the content we want extended into main.pug. The only code we really need to look at here is where we check the length of the "users" that we passed in in Nodejs. Basically we check that the amount of users is not zero, if so we list all the users in the database. If the amount of users are zero, we instead inform the client of that.
+Now back to home.pug, we see the all-familiar "extends" tag. Followed by the content we want extending into main.pug. The only code we need to look at here is where we check the length of the "users" that we passed in Nodejs. We check that the amount of users is not zero, if so we list all the users in the database. If the number of users is zero, we instead inform the client of that.
 
 (home.pug)
 ```
@@ -128,7 +128,7 @@ block content
          a(href="/deleteuser") Delete user
          p #{error}
 ```
-Back again at server.js, we see the code where the client can add a new user in the database. We begin by the usual `app.get` and `con.query`. But this time we dont use the results from `con.query` rather we look at the fields returned by the connection. We then loop through all the fields in the "brukere" table and find the ones without an underscore at the end of it. We then add this to the fieldlist and pass the fieldlist to the adduser.pug file when rendering.
+Back again at server.js, we see the code where the client can add a new user to the database. We begin by the usual `app.get` and `con.query`. But this time we don't use the results from `con.query` rather we look at the fields returned by the connection. We then loop through all the fields in the "brukere" table and find the ones without an underscore at the end of it. We then add this to the fieldlist and pass the fieldlist to the adduser.pug file when rendering.
 
 (server.js)
 
@@ -163,7 +163,7 @@ block content
 				br
 				input(type="submit", value="submit").button
 ```
-When the client clicks the submit button, its form will go into "/adduserbackend" and add the value of the input as a variable in the url. for example `/adduserbackend?name=newuser` In the nodejs server we can user another `app.get` function on "/adduserbackend" to see the name that the form passed in the url by looking at `req.query`. Then we just query the database and tell it to insert a user with that name, and also generate a new random ID for that user. Before redirecting the client to the main page to confirm that they have added a new user.
+When the client clicks the submit button, its form will go into "/adduserbackend" and add the value of the input as a variable in the url. for example `/adduserbackend?name=newuser` In the Nodejs server we can use another `app.get` function on "/adduserbackend" to see the name that the form passed in the URL by looking at `req.query`. Then we just query the database and tell it to insert a user with that name, and also generate a new random ID for that user. Before redirecting the client to the main page to confirm that they have added a new user.
 
 (server.js)
 
@@ -184,7 +184,7 @@ app.get("/adduserbackend", (req, res) => {
   res.redirect("/home")
 })
 ```
-When deleting a user, we first need to let the client know what users are already on the database. So in nodejs we just return deleteusers.pug with all the users currently on the database.
+When deleting a user, we first need to let the client know what users are already on the database. So in Nodejs we just return deleteusers.pug with all the users currently on the database.
 
 (server.js)
 
@@ -198,7 +198,7 @@ app.get("/deleteuser", (req, res) => {
   })
 })
 ```
-In deleteuser.pug we list all the users passed form the server and place a toggle beghind their name. When the user clicks submit, the form will go to `/deleteuserbackend` and pass inn all the ID's for the selected users. We then use `app.get` again to get all the ID's for the users we want to delete before looping through all of them and removing them from the database.
+In deleteuser.pug we list all the users passed from the server and place a toggle beghind their name. When the user clicks submit, the form will go to `/deleteuserbackend` and pass in all the ID's for the selected users. We then use `app.get` again to get all the ID's for the users we want to delete before looping through all of them and removing them from the database.
 
 (adduser.pug)
 
@@ -239,12 +239,12 @@ app.get("/deleteuserbackend", (req, res) => {
 
   let ids = req.query["id"] // Get all the ids that has been selected by the user
 
-  if (typeof ids != "string"){ // If the type of ids is as tring, the selection is a single user, therefore we only want to loop through all the items in ids when its not a string. If not we end up looping through all the numbers in the id.
+  if (typeof ids != "string"){ // If the type of ids is a string, the selection is a single user, therefore we only want to loop through all the items in ids when it's not a string. If not we end up looping through all the numbers in the id.
 
     for (let i = 0; i < ids.length; i++) { // Loop through all the ids and delete the name from the database with the same id.
 
       con.query(`DELETE FROM brukere WHERE id_ = ${ids[i]}`, (err, result, fields) => {
-        console.log(err) // If there is any errors, we just print it on the server. This is mainly for debugging purposes.
+        console.log(err) // If there are any errors, we just print it on the server. This is mainly for debugging purposes.
 
       })
 
