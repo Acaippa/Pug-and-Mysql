@@ -6,7 +6,7 @@ app.set('view engine', 'pug')
 
 // connect to the database
 var con = mysql.createConnection({
-  host: "192.168.1.191",
+  host: "localhost",
   port : 3306,
   user: "root",
   password: "rootadmin123",
