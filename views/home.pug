@@ -1,0 +1,19 @@
+extends main.pug
+
+block content
+   div.custom-container
+      div.custom-container1
+         h1 Home
+         h4 --All users in the database--
+
+         if users.length != 0
+            ul
+               each user in users
+                  li= user.name
+         else
+            p No users in the database
+
+         a(href="/adduser") Add new user 
+         br
+         a(href="/deleteuser") Delete user
+         p #{error}

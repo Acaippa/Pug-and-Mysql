@@ -1,0 +1,27 @@
+extends main.pug
+
+block content
+	div.custom-container
+		div.custom-container1
+			h1 Delete user
+
+			a(href="/home") Home 
+			br
+			input(type="checkbox", id="source", onchange="toggle()", name="all")
+			label(for="all") Select All
+
+			form(action="/deleteuserbackend")
+				each user in users
+					input(name="id", class="check", type="checkbox" value=user.id_)
+					label(for=user.name) #{user.name}
+					br
+				input(type="submit", value="Delete")
+
+			script(type="text/javascript").
+				function toggle(){
+					source = document.getElementById("source")
+					checks = document.getElementsByClassName("check")
+					for (let i = 0; i < checks.length; i++){
+						checks[i].checked = source.checked
+						}
+				}

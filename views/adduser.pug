@@ -1,0 +1,11 @@
+extends main.pug
+block content
+	div.custom-container
+		div
+			h1 Add a new user
+			a(href="/home") Home
+			form(action="/adduserbackend" method="get").pt-2
+				each field in fields
+					input(type='text' name="name", value='', placeholder=field).form-control
+				br
+				input(type="submit", value="submit").button
