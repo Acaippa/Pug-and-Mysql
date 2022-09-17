@@ -1,5 +1,5 @@
 # Pug-and-Mysql
-A short demonstration on how you can interact with an MySql database using Node.js and MySql.
+A short demonstration on how you can interact with an MySql database using Node.js.
 
 ## Getting started
 If you want to follow along, youll first of all need a MySql database setup and know its IP and password. Running the code as is will cause an error. The server needs Node.js to be installed in order to work aswell.
