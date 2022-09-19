@@ -8,7 +8,7 @@ If you want to follow along, you'll first of all need a MySql database setup and
 
 [Download MySql](https://dev.mysql.com/downloads/installer/)
 
-**Once both MySql and Nodejs have been installed**, go ahead and set up a database connection in MySql, and create a database with a "users" table with a *name* variable and an *id* Primary key, as shown below. I will not cover how to but there are plenty of tutorials online.
+**Once both MySql and Nodejs have been installed**, go ahead and set up a database connection in MySql, and create a database with a "users" table with a *name* variable and an *id* Primary key as shown below. I will not cover how to but there are plenty of tutorials online.
 
 (MySql)
 
